@@ -3,3 +3,9 @@ managed_users_main_group: default
 
 managed_users_groups:
   - name: sysadmin
+
+managed_users_accounts:
+  - name: sysadmin
+    shell: /bin/bash
+    groups:
+      - sysadmin

@@ -7,3 +7,12 @@
   with_flattened:
     - '{{ [managed_users_main_group] }}'
     - '{{ managed_users_groups | map(attribute="name") | list }}'
+
+- name: Create users accounts
+  become: yes
+  user:
+    name:   '{{ item.name }}'
+    shell:  '{{ item.shell | default("/bin/false") }}'
+    group:  '{{ managed_users_main_group }}'
+    groups: '{{ item.groups | join(",") if item.groups is defined else omit }}'
+  with_items: '{{ managed_users_accounts }}'
