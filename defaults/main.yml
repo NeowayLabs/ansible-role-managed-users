@@ -1,2 +1,5 @@
 ---
-# defaults file for managed_users
+managed_users_main_group: default
+
+managed_users_groups:
+  - name: sysadmin

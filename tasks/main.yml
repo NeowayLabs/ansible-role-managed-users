@@ -1,2 +1,9 @@
 ---
-# tasks file for managed_users
+- name: Create groups
+  become: yes
+  group:
+    name: '{{ item }}'
+    state: present
+  with_flattened:
+    - '{{ [managed_users_main_group] }}'
+    - '{{ managed_users_groups | map(attribute="name") | list }}'
