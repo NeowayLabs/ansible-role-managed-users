@@ -16,3 +16,11 @@
     group:  '{{ managed_users_main_group }}'
     groups: '{{ item.groups | join(",") if item.groups is defined else omit }}'
   with_items: '{{ managed_users_accounts }}'
+
+- name: Add authorized key
+  become: yes
+  authorized_key:
+    key:  '{{ item.authorized_key }}'
+    user: '{{ item.name }}'
+  when: (item.authorized_key | default())
+  with_items: '{{ managed_users_accounts }}'

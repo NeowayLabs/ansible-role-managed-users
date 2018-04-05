@@ -9,3 +9,4 @@ managed_users_accounts:
     shell: /bin/bash
     groups:
       - sysadmin
+    authorized_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfjDMqthwmXh8taIqnNzwJKVyOotU3VN9Rzvf/K+HisfNVKlZwC/VBOiTG/3ijeziBSgpDHGkxCmCa5Qaho/BeikEFr67/lCb6+hYuksoQnf3E/PnUFFUlGDUlqSrtSXBA9P9ZvdVy8YgRnGtGIxSxZaLhlkAecHe/UXr/NGjyHaGPu+yYKxd8gNtwafF335PQSNylhKUmcpvwPrWKQnOyA2p4AhDze7KT+LXEW2KsxNuflsXFqzcxlcEMmNHEPyzfPpm/+4mLZjQipjgyHlUPjlmwWJoHWLi0HfXh8e9nyA/KvgGT8mJWAwuC7zGggeDuujWQ+sweAsDa2DGQvGF9 sysadmin
