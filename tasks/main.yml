@@ -45,3 +45,17 @@
          item.value.1 >= managed_users_min_gid and
          item.value.1 <= managed_users_max_gid)
   with_dict: '{{ getent_group }}'
+
+- getent:
+    database: passwd
+
+- name: Prune managed users accounts
+  become: yes
+  user:
+    name: '{{ item.key }}'
+    state: absent
+    remove: yes
+    force: yes
+  when: (item.value.2 == getent_group[managed_users_main_group].1 and
+         item.key not in managed_users_accounts | map(attribute='name') | list)
+  with_dict: '{{ getent_passwd }}'
