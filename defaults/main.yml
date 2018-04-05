@@ -1,6 +1,13 @@
 ---
 managed_users_main_group: default
 
+managed_users_min_gid: 1000
+
+managed_users_max_gid: 2000
+
+managed_users_unmanaged_groups:
+  - bootstrap
+
 managed_users_groups:
   - name: sysadmin
 

@@ -24,3 +24,24 @@
     user: '{{ item.name }}'
   when: (item.authorized_key | default())
   with_items: '{{ managed_users_accounts }}'
+
+- getent:
+    database: group
+
+- name: Managed main group
+  debug:
+    msg: 'Managed main group: {{ managed_users_main_group }}, gid: {{ item.value.1 }}'
+  when: (item.key == managed_users_main_group)
+  with_dict: '{{ getent_group }}'
+
+- name: Prune managed groups
+  become: yes
+  group:
+    name: '{{ item }}'
+    state: absent
+  when: (item.key != managed_users_main_group and
+         item.key not in managed_users_unmanaged_groups and
+         item.key not in managed_users_groups | map(attribute='name') | list and
+         item.value.1 >= managed_users_min_gid and
+         item.value.1 <= managed_users_max_gid)
+  with_dict: '{{ getent_group }}'
